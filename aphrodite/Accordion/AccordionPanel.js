@@ -6,7 +6,7 @@ import {StyleSheet, css} from 'aphrodite';
    Styles
 ========================================================================== */
 
-const getStyles = function(props) {
+const getStyles = function(state, props) {
 
   return StyleSheet.create({
     container: {
@@ -27,17 +27,11 @@ const getStyles = function(props) {
       borderTopRightRadius: '4px',
       borderTopLeftRadius: '4px',
       color: '#333333',
-      backgroundColor: '#f5f5f5',
+      backgroundColor: props.isOpen ? '#eeeeee' : '#f5f5f5',
       borderColor: '#dddddd',
       textDecoration: 'none',
       ':hover': {
-        backgroundColor: '#f1f1f1'
-      }
-    },
-    heading_open: {
-      backgroundColor: '#eeeeee',
-      ':hover': {
-        backgroundColor: '#dadada',
+        backgroundColor: props.isOpen ? '#e5e5e5' : '#f1f1f1'
       }
     },
     title: {
@@ -52,7 +46,7 @@ const getStyles = function(props) {
     },
     body: {
       display: 'block',
-      height: props.height,
+      height: state.height,
       transition: 'height 300ms ease-out',
       overflow: 'hidden'
     },
@@ -95,10 +89,10 @@ class AccordionPanel extends React.Component {
 
   render() {
     const {title, children, isOpen, onClick} = this.props;
-    let styles = getStyles(this.state);
+    let styles = getStyles(this.state, this.props);
     return (
       <div className={css(styles.container)} onClick={onClick}>
-        <a className={css(styles.heading)} href="#" isOpen={isOpen}>
+        <a className={css(styles.heading)} href="#">
           <h4 className={css(styles.title)}>{title}</h4>
         </a>
         <div className={css(styles.body)} ref={(ref) => { this._body = ref; }}>
