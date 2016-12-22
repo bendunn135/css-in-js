@@ -6,7 +6,7 @@ import {StyleSheet, css} from 'aphrodite';
    Styles
 ========================================================================== */
 
-const createAccordion = function(props) {
+const getStyles = function(props) {
 
   return StyleSheet.create({
     container: {
@@ -95,7 +95,7 @@ class AccordionPanel extends React.Component {
 
   render() {
     const {title, children, isOpen, onClick} = this.props;
-    let styles = createAccordion(this.state);
+    let styles = getStyles(this.state);
     return (
       <div className={css(styles.container)} onClick={onClick}>
         <a className={css(styles.heading)} href="#" isOpen={isOpen}>
