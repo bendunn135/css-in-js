@@ -14,8 +14,8 @@ const createAccordion = function(props) {
       backgroundColor: 'white',
       border: '1px solid #dddddd',
       borderRadius: '3px',
-      '& + &': {
-        marginTop: '-0.1px'
+      ':not(:first-child)': {
+        marginTop: '-1px'
       }
     },
     heading: {
@@ -44,7 +44,7 @@ const createAccordion = function(props) {
       fontSize: '28px',
       margin: '0',
       ':before': { 
-        content: "'Read this -'",
+        content: "':before'",
         backgroundColor: 'yellow',
         color: 'red',
         fontWeight: 'bold'
@@ -84,11 +84,13 @@ class AccordionPanel extends React.Component {
   }
 
   toggleOpen() {
-    if (this.props.isOpen && this.state.height === 0) {
-      this.setState({height: ReactDom.findDOMNode(this._body).scrollHeight});
-    } else if (!this.props.isOpen && this.state.height > 0) {
-      this.setState({height: 0});
-    }
+    setTimeout(() => {
+      if (this.props.isOpen && this.state.height === 0) {
+        this.setState({height: ReactDom.findDOMNode(this._body).scrollHeight});
+      } else if (!this.props.isOpen && this.state.height > 0) {
+        this.setState({height: 0});
+      }
+    }, 0);
   }
 
   render() {
